@@ -50,3 +50,23 @@ extern "C" int mlx_metal_stop_capture(void) {
   }
   return 0;
 }
+
+extern "C" int mlx_metal_max_command_buffer_count(int* res) {
+  try {
+    *res = mlx::core::metal::max_command_buffer_count();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_metal_set_max_command_buffer_count(int count) {
+  try {
+    mlx::core::metal::set_max_command_buffer_count(count);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
