@@ -39,6 +39,11 @@ mlx_metal_device_info_t mlx_metal_device_info(void);
 int mlx_metal_is_available(bool* res);
 int mlx_metal_start_capture(const char* path);
 int mlx_metal_stop_capture(void);
+
+int mlx_metal_get_max_ops_per_buffer(int* value);
+int mlx_metal_set_max_ops_per_buffer(int value);
+int mlx_metal_get_max_mb_per_buffer(int* value);
+int mlx_metal_set_max_mb_per_buffer(int value);
 /**@}*/
 
 #ifdef __cplusplus

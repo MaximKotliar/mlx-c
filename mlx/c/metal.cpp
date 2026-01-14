@@ -5,6 +5,7 @@
 
 #include "mlx/c/metal.h"
 #include "mlx/backend/metal/metal.h"
+#include "mlx/backend/metal/device.h"
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
@@ -49,4 +50,48 @@ extern "C" int mlx_metal_stop_capture(void) {
     return 1;
   }
   return 0;
+}
+
+extern "C" int mlx_metal_get_max_ops_per_buffer(int* value) {
+  try {
+    auto& dev = mlx::core::metal::device(mlx::core::Device::gpu);
+    *value = dev.max_ops_per_buffer;
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_metal_set_max_ops_per_buffer(int value) {
+  try {
+    auto& dev = mlx::core::metal::device(mlx::core::Device::gpu);
+    dev.max_ops_per_buffer = value;
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_metal_get_max_mb_per_buffer(int* value) {
+  try {
+    auto& dev = mlx::core::metal::device(mlx::core::Device::gpu);
+    *value = dev.max_mb_per_buffer;
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_metal_set_max_mb_per_buffer(int value) {
+  try {
+    auto& dev = mlx::core::metal::device(mlx::core::Device::gpu);
+    dev.max_mb_per_buffer = value;
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
